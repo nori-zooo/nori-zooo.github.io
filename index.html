@@ -3,80 +3,332 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nori Zooo</title>
+  <title>Nori Zooo — モバイルアプリ開発者</title>
+  <meta name="description" content="家族の「今日も元気」をそっと見守る — React Native / Expo / Supabase で個人開発した3つのモバイルアプリ（みまもり・はじまりの刻・おかえりナビ）を紹介するポートフォリオ。">
+
+  <!-- OGP -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:site_name" content="Nori Zooo">
+  <meta property="og:title" content="Nori Zooo — モバイルアプリ開発者">
+  <meta property="og:description" content="家族の「今日も元気」をそっと見守る — React Native / Expo / Supabase で個人開発した3つのモバイルアプリを紹介。">
+  <meta property="og:url" content="https://nori-zooo.github.io/">
+  <meta property="og:image" content="https://nori-zooo.github.io/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nori Zooo — モバイルアプリ開発者">
+  <meta name="twitter:description" content="家族の「今日も元気」をそっと見守る — React Native / Expo / Supabase で個人開発した3つのモバイルアプリを紹介。">
+  <meta name="twitter:image" content="https://nori-zooo.github.io/assets/og.png">
+
+  <link rel="icon" href="/assets/apps/mimamori.png">
+
   <style>
+    :root {
+      --primary: #F09060;
+      --bg: #FAFAF9;
+      --text: #1C1917;
+      --muted: #78716C;
+      --border: #E7E5E4;
+      --card: #FFFFFF;
+      --teal: #0F766E;
+    }
+    * { box-sizing: border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, Arial, sans-serif;
       font-size: 16px;
       line-height: 1.8;
-      color: #1C1917;
-      background: #FAFAF9;
+      color: var(--text);
+      background: var(--bg);
       margin: 0;
       padding: 0;
+      -webkit-font-smoothing: antialiased;
     }
     .container {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 80px 24px;
+      padding: 0 24px;
     }
-    h1 {
-      font-size: 28px;
+
+    /* Hero */
+    .hero {
+      padding: 88px 0 56px;
+    }
+    .hero h1 {
+      font-size: 32px;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin: 0 0 6px;
+      letter-spacing: 0.01em;
     }
-    p {
-      color: #78716C;
-      margin-bottom: 48px;
-    }
-    h2 {
-      font-size: 14px;
+    .hero .role {
+      color: var(--primary);
       font-weight: 600;
-      color: #78716C;
+      font-size: 15px;
+      margin: 0 0 20px;
+    }
+    .hero .lead {
+      color: var(--muted);
+      font-size: 17px;
+      margin: 0;
+      max-width: 560px;
+    }
+
+    /* Section */
+    section { padding: 28px 0; }
+    .section-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin: 0 0 20px;
     }
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 48px;
+
+    /* App cards */
+    .apps {
+      display: grid;
+      gap: 16px;
     }
-    li {
-      border-bottom: 1px solid #E7E5E4;
+    .app-card {
+      display: flex;
+      gap: 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      align-items: flex-start;
     }
-    li:first-child {
-      border-top: 1px solid #E7E5E4;
+    .app-icon {
+      flex: 0 0 64px;
+      width: 64px;
+      height: 64px;
+      border-radius: 15px;
+      overflow: hidden;
+      border: 1px solid var(--border);
     }
-    a {
-      display: block;
+    .app-icon img { width: 100%; height: 100%; display: block; }
+    .app-icon svg { width: 100%; height: 100%; display: block; }
+    .app-body { flex: 1; min-width: 0; }
+    .app-name {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 2px;
+    }
+    .app-tagline {
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 600;
+      margin: 0 0 10px;
+    }
+    .app-desc {
+      font-size: 14.5px;
+      color: #44403C;
+      margin: 0 0 14px;
+      line-height: 1.7;
+    }
+    .shots {
+      display: flex;
+      gap: 10px;
+      margin: 0 0 14px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .shots img {
+      height: 300px;
+      width: auto;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      flex: 0 0 auto;
+      background: #fff;
+    }
+    .store-links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: #FAFAF9;
+      text-decoration: none;
+    }
+    a.badge:hover { color: var(--primary); border-color: var(--primary); }
+    .badge.coming { opacity: 0.65; }
+
+    /* Tech stack */
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 13px;
+      font-weight: 500;
+      color: #44403C;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 14px;
+    }
+
+    /* Links list */
+    .links { list-style: none; padding: 0; margin: 0; }
+    .links li { border-bottom: 1px solid var(--border); }
+    .links li:first-child { border-top: 1px solid var(--border); }
+    .links a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 16px 0;
-      color: #1C1917;
+      color: var(--text);
       text-decoration: none;
       font-weight: 500;
     }
-    a:hover {
-      color: #F09060;
+    .links a:hover { color: var(--primary); }
+    .links .sub { font-size: 12px; color: var(--muted); font-weight: 400; }
+
+    /* Footer */
+    footer {
+      padding: 48px 0 64px;
+      font-size: 13px;
+      color: var(--muted);
     }
-    .tag {
-      display: inline-block;
-      font-size: 12px;
-      color: #78716C;
-      font-weight: 400;
-      margin-left: 8px;
+
+    @media (max-width: 480px) {
+      .hero { padding: 56px 0 40px; }
+      .hero h1 { font-size: 27px; }
+      .hero .lead { font-size: 16px; }
+      .app-card { padding: 16px; gap: 14px; }
+      .app-icon { flex-basis: 56px; width: 56px; height: 56px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Nori Zooo</h1>
-    <p>モバイルアプリ開発者</p>
 
-    <h2>プライバシーポリシー</h2>
-    <ul>
-      <li><a href="/privacy/ja/mimamori">みまもり<span class="tag">Privacy Policy</span></a></li>
-      <li><a href="/privacy/ja/hajimari">はじまりの刻<span class="tag">Privacy Policy</span></a></li>
-      <li><a href="/privacy/ja/okaeri">おかえりナビ<span class="tag">Privacy Policy</span></a></li>
-    </ul>
+    <!-- Hero -->
+    <header class="hero">
+      <h1>Nori Zooo</h1>
+      <p class="role">モバイルアプリ開発者</p>
+      <p class="lead">離れて暮らす家族の「今日も元気」を、そっと見守る。React Native / Expo / Supabase で、安否見守りのモバイルアプリを個人開発しています。</p>
+    </header>
+
+    <!-- Apps -->
+    <section>
+      <p class="section-label">制作アプリ</p>
+      <div class="apps">
+
+        <!-- みまもり -->
+        <article class="app-card">
+          <div class="app-icon">
+            <img src="/assets/apps/mimamori.png" alt="みまもり アプリアイコン">
+          </div>
+          <div class="app-body">
+            <h3 class="app-name">みまもり</h3>
+            <p class="app-tagline">家族向け・見守りハブ</p>
+            <p class="app-desc">離れて暮らす家族の「今日も元気かな」を手軽に確認。おかえりナビ・はじまりの刻の利用状況をまとめて把握し、活動がしばらく途絶えると自動でプッシュ通知します。</p>
+            <div class="shots">
+              <img src="/assets/shots/mimamori-1.png" alt="みまもり 一覧画面" loading="lazy">
+              <img src="/assets/shots/mimamori-2.png" alt="みまもり 詳細画面" loading="lazy">
+            </div>
+            <div class="store-links">
+              <!-- ストア公開後に href を差し替え -->
+              <span class="badge coming">App Store 準備中</span>
+              <span class="badge coming">Google Play 準備中</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- はじまりの刻 -->
+        <article class="app-card">
+          <div class="app-icon">
+            <img src="/assets/apps/hajimari.png" alt="はじまりの刻 アプリアイコン">
+          </div>
+          <div class="app-body">
+            <h3 class="app-name">はじまりの刻</h3>
+            <p class="app-tagline">高齢者向け・かんたん安否確認</p>
+            <p class="app-desc">「アラームを止める」この1動作だけで、家族に元気を伝えるアプリ。ログイン不要、操作はボタン1つ。GPS を使わないため、利用のハードルを最小限にしました。</p>
+            <div class="shots">
+              <img src="/assets/shots/hajimari-1.png" alt="はじまりの刻 ホーム画面" loading="lazy">
+              <img src="/assets/shots/hajimari-2.png" alt="はじまりの刻 チェックイン画面" loading="lazy">
+            </div>
+            <div class="store-links">
+              <span class="badge coming">App Store 準備中</span>
+              <span class="badge coming">Google Play 準備中</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- おかえりナビ -->
+        <article class="app-card">
+          <div class="app-icon" style="background:#0F766E;border-color:#0F766E;">
+            <svg viewBox="0 0 64 64" role="img" aria-label="おかえりナビ アプリアイコン">
+              <g fill="none" stroke="#FAFAF9" stroke-width="2.4">
+                <circle cx="32" cy="32" r="20"/>
+                <circle cx="32" cy="32" r="13"/>
+              </g>
+              <circle cx="32" cy="32" r="5.5" fill="#FAFAF9"/>
+            </svg>
+          </div>
+          <div class="app-body">
+            <h3 class="app-name">おかえりナビ</h3>
+            <p class="app-tagline">認知症高齢者向け・音声ナビ</p>
+            <p class="app-desc">認知症の高齢者が「怖くならずに自宅へ帰れる」ことだけを目的とした、音声ガイドのナビアプリ。画面は2枚、操作は「いえに かえる」ボタン1つだけ。平仮名と短い音声で、迷わず自宅へ導きます。</p>
+            <div class="shots">
+              <img src="/assets/shots/okaeri-1.png" alt="おかえりナビ ナビゲーション画面" loading="lazy">
+            </div>
+            <div class="store-links">
+              <span class="badge coming">App Store 準備中</span>
+              <span class="badge coming">Google Play 準備中</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Tech stack -->
+    <section>
+      <p class="section-label">技術スタック</p>
+      <div class="chips">
+        <span class="chip">React Native</span>
+        <span class="chip">Expo</span>
+        <span class="chip">TypeScript</span>
+        <span class="chip">Expo Router</span>
+        <span class="chip">Supabase</span>
+        <span class="chip">PostgreSQL</span>
+        <span class="chip">Edge Functions (Deno)</span>
+        <span class="chip">TanStack Query</span>
+        <span class="chip">Zustand</span>
+        <span class="chip">EAS Build</span>
+      </div>
+    </section>
+
+    <!-- Links -->
+    <section>
+      <p class="section-label">リンク</p>
+      <ul class="links">
+        <li><a href="https://github.com/nori-zooo" target="_blank" rel="noopener">GitHub<span class="sub">@nori-zooo</span></a></li>
+        <li><a href="mailto:takuya.norishige@gmail.com">お問い合わせ<span class="sub">Email</span></a></li>
+      </ul>
+    </section>
+
+    <!-- Privacy -->
+    <section>
+      <p class="section-label">プライバシーポリシー</p>
+      <ul class="links">
+        <li><a href="/privacy/ja/mimamori">みまもり<span class="sub">Privacy Policy</span></a></li>
+        <li><a href="/privacy/ja/hajimari">はじまりの刻<span class="sub">Privacy Policy</span></a></li>
+        <li><a href="/privacy/ja/okaeri">おかえりナビ<span class="sub">Privacy Policy</span></a></li>
+      </ul>
+    </section>
+
+    <footer>
+      © 2026 Nori Zooo. All rights reserved.
+    </footer>
+
   </div>
 </body>
 </html>
