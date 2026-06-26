@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nori Zooo — モバイルアプリ開発者</title>
-  <meta name="description" content="家族の「今日も元気」をそっと見守る — React Native / Expo / Supabase で個人開発した3つのモバイルアプリ（みまもり・はじまりの刻・おかえりナビ）を紹介するポートフォリオ。">
+  <title>Class Orange — モバイルアプリ開発</title>
+  <meta name="description" content="家族の「今日も元気」をそっと見守る — React Native / Expo / Supabase で個人開発した2つのモバイルアプリ（みまもり・はじまりの刻）を紹介するポートフォリオ。">
 
   <!-- OGP -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ja_JP">
-  <meta property="og:site_name" content="Nori Zooo">
-  <meta property="og:title" content="Nori Zooo — モバイルアプリ開発者">
-  <meta property="og:description" content="家族の「今日も元気」をそっと見守る — React Native / Expo / Supabase で個人開発した3つのモバイルアプリを紹介。">
+  <meta property="og:site_name" content="Class Orange">
+  <meta property="og:title" content="Class Orange — モバイルアプリ開発">
+  <meta property="og:description" content="家族の「今日も元気」をそっと見守る — React Native / Expo / Supabase で個人開発した2つのモバイルアプリを紹介。">
   <meta property="og:url" content="https://nori-zooo.github.io/">
   <meta property="og:image" content="https://nori-zooo.github.io/assets/og.png">
   <meta property="og:image:width" content="1200">
@@ -19,8 +19,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Nori Zooo — モバイルアプリ開発者">
-  <meta name="twitter:description" content="家族の「今日も元気」をそっと見守る — React Native / Expo / Supabase で個人開発した3つのモバイルアプリを紹介。">
+  <meta name="twitter:title" content="Class Orange — モバイルアプリ開発">
+  <meta name="twitter:description" content="家族の「今日も元気」をそっと見守る — React Native / Expo / Supabase で個人開発した2つのモバイルアプリを紹介。">
   <meta name="twitter:image" content="https://nori-zooo.github.io/assets/og.png">
 
   <link rel="icon" href="/assets/apps/mimamori.png">
@@ -72,8 +72,11 @@
       color: var(--muted);
       font-size: 17px;
       margin: 0;
-      max-width: 560px;
+      max-width: 640px;
+      word-break: keep-all;
+      line-break: strict;
     }
+    .hero .lead .nowrap { white-space: nowrap; }
 
     /* Section */
     section { padding: 28px 0; }
@@ -161,6 +164,79 @@
     a.badge:hover { color: var(--primary); border-color: var(--primary); }
     .badge.coming { opacity: 0.65; }
 
+    /* しくみ（関係図） */
+    .flow {
+      display: flex;
+      align-items: stretch;
+      gap: 14px;
+    }
+    .flow-node {
+      flex: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 14px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .flow-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 13px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .flow-icon img { width: 100%; height: 100%; display: block; }
+    .flow-node-name { font-weight: 700; font-size: 15px; }
+    .flow-node-role { font-size: 12px; color: var(--muted); }
+    .flow-arrows {
+      flex: 0 0 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+    }
+    .flow-arrow { text-align: center; }
+    .flow-label {
+      display: block;
+      font-size: 11px;
+      line-height: 1.4;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+    .flow-arrow.right .flow-label { color: var(--primary); font-weight: 600; }
+    .flow-arrow .bar {
+      display: block;
+      position: relative;
+      height: 2px;
+      background: var(--primary);
+      margin: 0 6px;
+    }
+    /* 横向き矢印の先端（PC） */
+    .flow-arrow.right .bar::after {
+      content: "";
+      position: absolute;
+      right: -1px; top: -3px;
+      border: 4px solid transparent;
+      border-left-color: var(--primary);
+    }
+    .flow-arrow.left .bar::before {
+      content: "";
+      position: absolute;
+      left: -1px; top: -3px;
+      border: 4px solid transparent;
+      border-right-color: var(--primary);
+    }
+    .flow-caption {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 16px 0 0;
+      line-height: 1.7;
+    }
+
     /* Tech stack */
     .chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .chip {
@@ -202,6 +278,20 @@
       .hero .lead { font-size: 16px; }
       .app-card { padding: 16px; gap: 14px; }
       .app-icon { flex-basis: 56px; width: 56px; height: 56px; }
+
+      /* 関係図はスマホ幅で縦積み */
+      .flow { flex-direction: column; align-items: stretch; }
+      .flow-arrows { flex-basis: auto; flex-direction: row; justify-content: center; gap: 28px; }
+      .flow-arrow .bar { height: 30px; width: 2px; margin: 0 auto; }
+      /* 縦向き矢印の先端（スマホ） */
+      .flow-arrow.right .bar::after {
+        right: auto; left: -3px; top: auto; bottom: -1px;
+        border-left-color: transparent; border-top-color: var(--primary);
+      }
+      .flow-arrow.left .bar::before {
+        left: -3px; top: -1px;
+        border-right-color: transparent; border-bottom-color: var(--primary);
+      }
     }
   </style>
 </head>
@@ -210,9 +300,9 @@
 
     <!-- Hero -->
     <header class="hero">
-      <h1>Nori Zooo</h1>
-      <p class="role">モバイルアプリ開発者</p>
-      <p class="lead">離れて暮らす家族の「今日も元気」を、そっと見守る。React Native / Expo / Supabase で、安否見守りのモバイルアプリを個人開発しています。</p>
+      <h1>あんしん プラットフォーム</h1>
+      <p class="role">モバイルアプリ開発</p>
+      <p class="lead">「アラームを止める」——たったそれだけで、離れて暮らす家族の<br>「今日も元気」が伝わる。<br>そんな安否みまもりを、あんしんアプリ（みまもり、はじまりの刻）で実現させます。</p>
     </header>
 
     <!-- Apps -->
@@ -228,10 +318,12 @@
           <div class="app-body">
             <h3 class="app-name">みまもり</h3>
             <p class="app-tagline">家族向け・見守りハブ</p>
-            <p class="app-desc">離れて暮らす家族の「今日も元気かな」を手軽に確認。おかえりナビ・はじまりの刻の利用状況をまとめて把握し、活動がしばらく途絶えると自動でプッシュ通知します。</p>
+            <p class="app-desc">離れて暮らす家族の「今日も元気かな」を手軽に確認。はじまりの刻の利用状況を把握し、活動がしばらく途絶えると自動でプッシュ通知します。</p>
             <div class="shots">
+              <img src="/assets/shots/mimamori-3.png" alt="みまもり 招待画面" loading="lazy">
               <img src="/assets/shots/mimamori-1.png" alt="みまもり 一覧画面" loading="lazy">
               <img src="/assets/shots/mimamori-2.png" alt="みまもり 詳細画面" loading="lazy">
+              <img src="/assets/shots/mimamori-4.png" alt="みまもり アラーム管理画面" loading="lazy">
             </div>
             <div class="store-links">
               <!-- ストア公開後に href を差し替え -->
@@ -261,32 +353,37 @@
           </div>
         </article>
 
-        <!-- おかえりナビ -->
-        <article class="app-card">
-          <div class="app-icon" style="background:#0F766E;border-color:#0F766E;">
-            <svg viewBox="0 0 64 64" role="img" aria-label="おかえりナビ アプリアイコン">
-              <g fill="none" stroke="#FAFAF9" stroke-width="2.4">
-                <circle cx="32" cy="32" r="20"/>
-                <circle cx="32" cy="32" r="13"/>
-              </g>
-              <circle cx="32" cy="32" r="5.5" fill="#FAFAF9"/>
-            </svg>
-          </div>
-          <div class="app-body">
-            <h3 class="app-name">おかえりナビ</h3>
-            <p class="app-tagline">認知症高齢者向け・音声ナビ</p>
-            <p class="app-desc">認知症の高齢者が「怖くならずに自宅へ帰れる」ことだけを目的とした、音声ガイドのナビアプリ。画面は2枚、操作は「いえに かえる」ボタン1つだけ。平仮名と短い音声で、迷わず自宅へ導きます。</p>
-            <div class="shots">
-              <img src="/assets/shots/okaeri-1.png" alt="おかえりナビ ナビゲーション画面" loading="lazy">
-            </div>
-            <div class="store-links">
-              <span class="badge coming">App Store 準備中</span>
-              <span class="badge coming">Google Play 準備中</span>
-            </div>
-          </div>
-        </article>
+        <!-- おかえりナビは公開準備が整うまで非掲載（#141 / 再掲載は #140 と連動） -->
 
       </div>
+    </section>
+
+    <!-- しくみ（みまもり × はじまりの刻 の関係図） -->
+    <section>
+      <p class="section-label">しくみ</p>
+      <div class="flow">
+        <div class="flow-node">
+          <div class="flow-icon"><img src="/assets/apps/hajimari.png" alt="はじまりの刻 アプリアイコン"></div>
+          <div class="flow-node-name">はじまりの刻</div>
+          <div class="flow-node-role">高齢者がつかう</div>
+        </div>
+        <div class="flow-arrows">
+          <div class="flow-arrow right">
+            <span class="flow-label">「げんきだよ！」で安否が届く</span>
+            <span class="bar"></span>
+          </div>
+          <div class="flow-arrow left">
+            <span class="flow-label">アラームを設定する</span>
+            <span class="bar"></span>
+          </div>
+        </div>
+        <div class="flow-node">
+          <div class="flow-icon"><img src="/assets/apps/mimamori.png" alt="みまもり アプリアイコン"></div>
+          <div class="flow-node-name">みまもり</div>
+          <div class="flow-node-role">家族がつかう</div>
+        </div>
+      </div>
+      <p class="flow-caption">高齢者が「はじまりの刻」でアラームを止めて元気を伝えると、その日の安否が家族の「みまもり」に届きます。家族はみまもりからアラームの設定もできます。</p>
     </section>
 
     <!-- Tech stack -->
@@ -310,8 +407,8 @@
     <section>
       <p class="section-label">リンク</p>
       <ul class="links">
-        <li><a href="https://github.com/nori-zooo" target="_blank" rel="noopener">GitHub<span class="sub">@nori-zooo</span></a></li>
-        <li><a href="mailto:takuya.norishige@gmail.com">お問い合わせ<span class="sub">Email</span></a></li>
+        <!-- GitHub リンクは実績リポジトリ公開まで一時非掲載（プロフィールが練習リポのみで逆効果のため） -->
+        <li><a href="mailto:support@class-orange.com">お問い合わせ<span class="sub">Email</span></a></li>
       </ul>
     </section>
 
@@ -319,14 +416,14 @@
     <section>
       <p class="section-label">プライバシーポリシー</p>
       <ul class="links">
-        <li><a href="/privacy/ja/mimamori">みまもり<span class="sub">Privacy Policy</span></a></li>
-        <li><a href="/privacy/ja/hajimari">はじまりの刻<span class="sub">Privacy Policy</span></a></li>
-        <li><a href="/privacy/ja/okaeri">おかえりナビ<span class="sub">Privacy Policy</span></a></li>
+        <li><a href="/privacy/ja/mimamori.html">みまもり<span class="sub">Privacy Policy</span></a></li>
+        <li><a href="/privacy/ja/hajimari.html">はじまりの刻<span class="sub">Privacy Policy</span></a></li>
+        <!-- おかえりナビは公開準備が整うまで非掲載（#141 / 再掲載は #140 と連動。ページ自体は /privacy/ja/okaeri に存置） -->
       </ul>
     </section>
 
     <footer>
-      © 2026 Nori Zooo. All rights reserved.
+      © 2026 Class Orange. All rights reserved.
     </footer>
 
   </div>
