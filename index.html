@@ -92,6 +92,9 @@
     /* App cards */
     .apps {
       display: grid;
+      /* minmax(0,1fr): スクショ横スクロール（.shots）の内容幅でトラックが広がり
+         モバイルで横はみ出しするのを防ぐ */
+      grid-template-columns: minmax(0, 1fr);
       gap: 16px;
     }
     .app-card {
@@ -237,6 +240,30 @@
       line-height: 1.7;
     }
 
+    /* 安心への取り組み */
+    .trust {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .trust-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 16px 14px;
+    }
+    .trust-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin: 0 0 6px;
+    }
+    .trust-desc {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.7;
+    }
+
     /* Tech stack */
     .chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .chip {
@@ -274,6 +301,7 @@
 
     @media (max-width: 480px) {
       .hero { padding: 56px 0 40px; }
+      .trust { grid-template-columns: 1fr; }
       .hero h1 { font-size: 27px; }
       .hero .lead { font-size: 16px; }
       .app-card { padding: 16px; gap: 14px; }
@@ -317,13 +345,13 @@
           </div>
           <div class="app-body">
             <h3 class="app-name">みまもり</h3>
-            <p class="app-tagline">家族向け・見守りハブ</p>
-            <p class="app-desc">離れて暮らす家族の「今日も元気かな」を手軽に確認。はじまりの刻の利用状況を把握し、活動がしばらく途絶えると自動でプッシュ通知します。</p>
+            <p class="app-tagline">「今日もげんき」が、一目でわかる。</p>
+            <p class="app-desc">離れて暮らす家族を、そっとみまもる家族向けアプリ。アラームの確認やアプリの起動といった日々の活動をタイムラインでやさしく記録し、活動がしばらく途絶えると、家族へ自動でお知らせします。アラームの設定や見守りの開始（QR招待）も家族側から行えます。</p>
             <div class="shots">
-              <img src="/assets/shots/mimamori-3.png" alt="みまもり 招待画面" loading="lazy">
-              <img src="/assets/shots/mimamori-1.png" alt="みまもり 一覧画面" loading="lazy">
-              <img src="/assets/shots/mimamori-2.png" alt="みまもり 詳細画面" loading="lazy">
-              <img src="/assets/shots/mimamori-4.png" alt="みまもり アラーム管理画面" loading="lazy">
+              <img src="/assets/shots/mimamori-list.webp" alt="みまもり 一覧画面 — 家族の今日の元気がひと目でわかる" loading="lazy">
+              <img src="/assets/shots/mimamori-detail.webp" alt="みまもり 詳細画面 — 一日の活動をタイムラインで記録" loading="lazy">
+              <img src="/assets/shots/mimamori-notify.webp" alt="みまもり 通知設定画面 — 通知までの時間を柔軟に設定" loading="lazy">
+              <img src="/assets/shots/mimamori-invite.webp" alt="みまもり 招待画面 — QRコードでかんたん見守り開始" loading="lazy">
             </div>
             <div class="store-links">
               <!-- ストア公開後に href を差し替え -->
@@ -340,11 +368,12 @@
           </div>
           <div class="app-body">
             <h3 class="app-name">はじまりの刻</h3>
-            <p class="app-tagline">高齢者向け・かんたん安否確認</p>
-            <p class="app-desc">「アラームを止める」この1動作だけで、家族に元気を伝えるアプリ。ログイン不要、操作はボタン1つ。GPS を使わないため、利用のハードルを最小限にしました。</p>
+            <p class="app-tagline">はじまりボタンが、「げんき」の知らせ。</p>
+            <p class="app-desc">「アラームを止める」この1動作だけで、家族に元気を伝える高齢者向けアプリ。ログイン不要、操作はボタン1つ、むずかしい設定は要りません。アラームは家族が「みまもり」から遠隔で設定できるので、本人は毎日のアラームを止めるだけ。</p>
             <div class="shots">
-              <img src="/assets/shots/hajimari-1.png" alt="はじまりの刻 ホーム画面" loading="lazy">
-              <img src="/assets/shots/hajimari-2.png" alt="はじまりの刻 チェックイン画面" loading="lazy">
+              <img src="/assets/shots/hajimari-home.webp" alt="はじまりの刻 ホーム画面 — 今日のアラームがひと目でわかる" loading="lazy">
+              <img src="/assets/shots/hajimari-checkin.webp" alt="はじまりの刻 チェックイン画面 — 大きなボタンひとつで元気を届ける" loading="lazy">
+              <img src="/assets/shots/hajimari-alarm.webp" alt="はじまりの刻 アラーム設定画面 — 時間を決めてかんたん設定" loading="lazy">
             </div>
             <div class="store-links">
               <span class="badge coming">App Store 準備中</span>
@@ -386,6 +415,25 @@
       <p class="flow-caption">高齢者が「はじまりの刻」でアラームを止めて元気を伝えると、その日の安否が家族の「みまもり」に届きます。家族はみまもりからアラームの設定もできます。</p>
     </section>
 
+    <!-- 安心への取り組み -->
+    <section>
+      <p class="section-label">安心への取り組み</p>
+      <div class="trust">
+        <div class="trust-item">
+          <p class="trust-title">見守りは招待制</p>
+          <p class="trust-desc">見守りの開始には、本人の端末で招待QRコードを開いて受け入れる操作が必要。知らないうちに登録される心配がありません。招待コードは有効期限つき・1回限りです。</p>
+        </div>
+        <div class="trust-item">
+          <p class="trust-title">集める情報は最小限</p>
+          <p class="trust-desc">必要な情報だけを、目的の範囲で扱う設計。ログインは不要で、家族に届くのは「アラームを確認した」「アプリを使った」といった日々の元気のしるしです。</p>
+        </div>
+        <div class="trust-item">
+          <p class="trust-title">データ保護と削除の権利</p>
+          <p class="trust-desc">データへのアクセスはサーバー側で厳格に制御（Row Level Security + Edge Functions 集約）。アカウントはアプリ内からいつでも削除できます。</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Tech stack -->
     <section>
       <p class="section-label">技術スタック</p>
@@ -393,13 +441,10 @@
         <span class="chip">React Native</span>
         <span class="chip">Expo</span>
         <span class="chip">TypeScript</span>
-        <span class="chip">Expo Router</span>
         <span class="chip">Supabase</span>
         <span class="chip">PostgreSQL</span>
-        <span class="chip">Edge Functions (Deno)</span>
+        <span class="chip">Deno</span>
         <span class="chip">TanStack Query</span>
-        <span class="chip">Zustand</span>
-        <span class="chip">EAS Build</span>
       </div>
     </section>
 
