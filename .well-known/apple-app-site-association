@@ -1,0 +1,20 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["4SC8H3PQN8.com.norizooo.hajimari"],
+        "components": [
+          { "/": "/invite/hajimari" },
+          { "/": "/invite/hajimari/*" }
+        ]
+      },
+      {
+        "appIDs": ["4SC8H3PQN8.com.norizooo.okaeri"],
+        "components": [
+          { "/": "/invite/okaeri" },
+          { "/": "/invite/okaeri/*" }
+        ]
+      }
+    ]
+  }
+}
