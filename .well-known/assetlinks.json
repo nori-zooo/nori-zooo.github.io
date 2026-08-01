@@ -5,17 +5,7 @@
       "namespace": "android_app",
       "package_name": "com.norizooo.hajimari",
       "sha256_cert_fingerprints": [
-        "REPLACE_WITH_HAJIMARI_PLAY_APP_SIGNING_SHA256"
-      ]
-    }
-  },
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "com.norizooo.okaeri",
-      "sha256_cert_fingerprints": [
-        "REPLACE_WITH_OKAERI_PLAY_APP_SIGNING_SHA256"
+        "DA:B7:77:64:D7:7E:8D:62:15:D9:A0:D6:05:E0:D4:E5:B0:FA:D6:3F:18:AD:00:58:52:FF:2E:38:8D:2E:9D:48"
       ]
     }
   }
