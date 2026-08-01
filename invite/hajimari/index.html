@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>はじまりの刻 — 招待</title>
+  <meta name="description" content="「はじまりの刻」への招待リンクです。アプリをインストールすると、家族のみまもりがはじまります。">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/apps/hajimari.png">
+
+  <!--
+    招待の中間ページ（anshin-platform #167）
+
+    役割:
+      みまもりアプリが発行する招待URL
+        https://class-orange.com/invite/hajimari/?t={TOKEN}
+      の着地点。App Links（Android）/ Universal Links（iOS）が成立していれば
+      OS がアプリを直接開くため、このページは「アプリ未インストール端末」だけが見る。
+      その場合にストアへ誘導するのが本ページの目的。
+
+    設定ファイル:
+      - /.well-known/assetlinks.json（Android App Links）
+      - /.well-known/apple-app-site-association（iOS Universal Links）
+      - リポジトリ直下の .nojekyll（.well-known を GitHub Pages で配信するために必須）
+  -->
+  <style>
+    :root {
+      --primary: #F09060;
+      --bg: #FFF4EE;
+      --text: #1C1917;
+      --muted: #78716C;
+      --border: #E7E5E4;
+      --card: #FFFFFF;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, Arial, sans-serif;
+      font-size: 17px;
+      line-height: 1.9;
+      color: var(--text);
+      background: var(--bg);
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 40px 24px 64px;
+    }
+    .app {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .app img {
+      width: 64px;
+      height: 64px;
+      border-radius: 15px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .app-name { font-size: 20px; font-weight: 700; }
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 0 12px;
+      line-height: 1.6;
+    }
+    .lead { color: var(--muted); margin: 0 0 28px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .code-label { font-size: 13px; color: var(--muted); margin: 0 0 4px; }
+    .code {
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      word-break: break-all;
+      margin: 0;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 18px 20px;
+      border-radius: 14px;
+      font-size: 18px;
+      font-weight: 700;
+      text-decoration: none;
+      margin-bottom: 14px;
+      border: 1px solid transparent;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { background: var(--card); color: var(--text); border-color: var(--border); }
+    .steps {
+      margin: 0;
+      padding-left: 1.4em;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .steps li { margin-bottom: 8px; }
+    .error {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      color: var(--muted);
+    }
+    .foot {
+      margin-top: 32px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .foot a { color: var(--muted); }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="app">
+      <img src="/assets/apps/hajimari.png" alt="">
+      <div class="app-name">はじまりの刻</div>
+    </div>
+
+    <div id="invite" hidden>
+      <h1>アプリを インストールしてください</h1>
+      <p class="lead">ご家族から「はじまりの刻」への招待がとどいています。</p>
+
+      <a id="store" class="btn btn-primary" href="#">アプリを インストールする</a>
+      <a id="open" class="btn btn-secondary" href="#">アプリを ひらく（インストール済みの方）</a>
+
+      <div class="card">
+        <p class="code-label">招待コード</p>
+        <p class="code" id="code"></p>
+      </div>
+
+      <ol class="steps">
+        <li>「アプリを インストールする」からアプリを入れます。</li>
+        <li>インストールが終わったら、<strong>もう一度このリンクを開いて</strong>ください。</li>
+        <li>アプリが開いて、みまもりがはじまります。</li>
+      </ol>
+    </div>
+
+    <div id="noToken" class="error" hidden>
+      <p>招待リンクが正しくないようです。</p>
+      <p>ご家族に、もう一度リンクを送ってもらってください。</p>
+    </div>
+
+    <p class="foot">
+      <a href="/">Class Orange</a> ・
+      <a href="/privacy/ja/hajimari.html">プライバシーポリシー</a>
+    </p>
+  </div>
+
+  <script>
+    (function () {
+      var APP_SCHEME = "hajimari";
+      var PLAY_URL = "https://play.google.com/store/apps/details?id=com.norizooo.hajimari";
+      // TODO(#167): App Store 公開後、採番された数値 ID を入れる（例: "6478123456"）。
+      // 空のままだと App Store の検索結果ページへ誘導する（リンク切れは避ける）。
+      var APP_STORE_ID = "";
+      var APP_STORE_SEARCH_URL = "https://apps.apple.com/jp/search?term=" + encodeURIComponent("はじまりの刻");
+
+      var token = new URLSearchParams(location.search).get("t") || "";
+      // みまもりが発行するトークンは Crockford base32（大文字英数）16文字
+      if (!/^[A-Z0-9]{8,32}$/.test(token)) {
+        document.getElementById("noToken").hidden = false;
+        return;
+      }
+
+      var ua = navigator.userAgent || "";
+      var isAndroid = /Android/i.test(ua);
+      var isIOS = /iPad|iPhone|iPod/i.test(ua) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+      var storeUrl = PLAY_URL;
+      if (isIOS) {
+        storeUrl = APP_STORE_ID
+          ? "https://apps.apple.com/jp/app/id" + APP_STORE_ID
+          : APP_STORE_SEARCH_URL;
+      } else if (!isAndroid) {
+        // PC などストアアプリが無い環境。Android 版のページを既定にしておく。
+        storeUrl = PLAY_URL;
+      }
+
+      document.getElementById("code").textContent = token;
+      document.getElementById("store").href = storeUrl;
+      // App Links / Universal Links の検証が済んでいない端末向けの保険。
+      document.getElementById("open").href = APP_SCHEME + "://invite/" + token;
+      document.getElementById("invite").hidden = false;
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.norizooo.hajimari",
+      "sha256_cert_fingerprints": [
+        "REPLACE_WITH_HAJIMARI_PLAY_APP_SIGNING_SHA256"
+      ]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.norizooo.okaeri",
+      "sha256_cert_fingerprints": [
+        "REPLACE_WITH_OKAERI_PLAY_APP_SIGNING_SHA256"
+      ]
+    }
+  }
+]
