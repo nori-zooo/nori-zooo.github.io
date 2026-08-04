@@ -43,6 +43,18 @@ Play Console → 対象アプリ → **Google Play による保護** → 「Goog
 `invite/hajimari/index.html` / `invite/okaeri/index.html` の JS 冒頭。App Store 公開時に採番される
 数値 ID を入れる。空の間は App Store の検索結果ページへ誘導する（リンク切れ回避）。
 
+**はじまりの刻の ID は判明済み: `6767998433`**（2026-08-02・TestFlight 配信時に確認）。
+App Store Connect のアプリ ID と App Store の URL の数値は同一で、
+`https://appstoreconnect.apple.com/apps/6767998433/testflight/ios` の `apps/` 直後に現れる。
+App Store Connect → App 情報 → 一般情報 → Apple ID でも確認できる。
+
+> ⚠️ **公開までは埋めないこと。** `https://apps.apple.com/jp/app/id{ID}` は
+> アプリが App Store で公開されるまで **404** を返す。値を入れた時点でこの URL が使われるため、
+> 未公開のまま埋めるとリンク切れになる。空のまま検索ページへ誘導する現状の方が正しく機能する。
+> **App Store 公開と同時に埋める。**
+
+おかえりナビはリリース見送り中のため未採番（`assetlinks.json` のエントリ未記載と同じ理由）。
+
 ## 検証方法
 
 ```bash
