@@ -93,12 +93,30 @@
       border-radius: 14px;
       font-size: 18px;
       font-weight: 700;
+      /* body の line-height 1.9 のままだとボタン内が間延びして「押せる領域」に見えない */
+      line-height: 1.4;
       text-decoration: none;
       margin-bottom: 14px;
-      border: 1px solid transparent;
+      border: 2px solid transparent;
+      box-shadow: 0 1px 2px rgba(28, 25, 23, 0.08);
     }
     .btn-primary { background: var(--primary); color: #fff; }
-    .btn-secondary { background: var(--card); color: var(--text); border-color: var(--border); }
+    /* 白背景 × 薄いグレー枠だとページ背景に溶けてボタンに見えないため、
+       枠線と文字色をプライマリにしたアウトラインボタンにする。 */
+    .btn-secondary {
+      background: var(--card);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    /* ボタンの補足行（例「インストール済みの方」）。ラベル本体を短く保って
+       折り返さないようにし、条件はこの小さい行へ逃がす。 */
+    .btn-sub {
+      display: block;
+      margin-top: 2px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+    }
     .steps {
       margin: 0;
       padding-left: 1.4em;
@@ -134,7 +152,7 @@
       <p class="lead">ご家族から「はじまりの刻」への招待がとどいています。</p>
 
       <a id="store" class="btn btn-primary" href="#">アプリを インストールする</a>
-      <a id="open" class="btn btn-secondary" href="#">アプリを ひらく（インストール済みの方）</a>
+      <a id="open" class="btn btn-secondary" href="#">アプリを ひらく<span class="btn-sub">インストール済みの方</span></a>
 
       <div class="card">
         <p class="code-label">招待コード</p>
