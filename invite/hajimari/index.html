@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>はじまりの刻 — 招待</title>
-  <meta name="description" content="「はじまりの刻」への招待リンクです。アプリをインストールすると、家族のみまもりがはじまります。">
+  <title>あんしんのはじまり — 招待</title>
+  <meta name="description" content="「あんしんのはじまり」への招待リンクです。アプリをインストールすると、家族のみまもりがはじまります。">
   <meta name="robots" content="noindex">
   <link rel="icon" href="/assets/apps/hajimari.png">
 
@@ -144,12 +144,12 @@
   <div class="wrap">
     <div class="app">
       <img src="/assets/apps/hajimari.png" alt="">
-      <div class="app-name">はじまりの刻</div>
+      <div class="app-name">あんしんのはじまり</div>
     </div>
 
     <div id="invite" hidden>
       <h1>アプリを インストールしてください</h1>
-      <p class="lead">ご家族から「はじまりの刻」への招待がとどいています。</p>
+      <p class="lead">ご家族から「あんしんのはじまり」への招待がとどいています。</p>
 
       <a id="store" class="btn btn-primary" href="#">アプリを インストールする</a>
       <a id="open" class="btn btn-secondary" href="#">アプリを ひらく<span class="btn-sub">インストール済みの方</span></a>
@@ -192,7 +192,10 @@
       // TODO(#167): App Store 公開後、採番された数値 ID を入れる（例: "6478123456"）。
       // 空のままだと App Store の検索結果ページへ誘導する（リンク切れは避ける）。
       var APP_STORE_ID = "";
-      var APP_STORE_SEARCH_URL = "https://apps.apple.com/jp/search?term=" + encodeURIComponent("はじまりの刻");
+      // ⚠️ 検索語は **App Store の掲載名と完全に一致**させること（anshin-platform #234）。
+      // ここがズレると招待された人が検索でアプリに辿り着けず、招待フローが成立しない。
+      // 数値 ID が採番されたら APP_STORE_ID を埋めて、この検索フォールバックは使われなくなる。
+      var APP_STORE_SEARCH_URL = "https://apps.apple.com/jp/search?term=" + encodeURIComponent("あんしんのはじまり");
 
       var token = new URLSearchParams(location.search).get("t") || "";
       // みまもりが発行するトークンは Crockford base32（大文字英数）16文字
