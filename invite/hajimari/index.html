@@ -17,6 +17,9 @@
       の着地点。App Links（Android）/ Universal Links（iOS）が成立していれば
       OS がアプリを直接開くため、このページは「アプリ未インストール端末」だけが見る。
       その場合にストアへ誘導するのが本ページの目的。
+      あわせて、リンク経由で紐付かなかったときの逃げ道（「番号でつなぐ」= anshin-platform #308）
+      も案内する。iOS はインストール後にリンクを踏み直す必要があり、忘れたまま先へ進んだ人が
+      ここで詰まるため。
 
     設定ファイル:
       - /.well-known/assetlinks.json（Android App Links）
@@ -124,6 +127,23 @@
       font-size: 15px;
     }
     .steps li { margin-bottom: 8px; }
+    /* つながらなかったときの逃げ道（番号でつなぐ・anshin-platform #308/#245）。
+       ストア誘導の手順より一段弱く見せる（本筋は上の1〜3で、これは保険）。 */
+    .fallback {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 15px;
+      color: var(--muted);
+    }
+    .fallback-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 8px;
+    }
+    .fallback p { margin: 0; }
+    .fallback strong { color: var(--text); }
     .error {
       background: var(--card);
       border: 1px solid var(--border);
@@ -172,6 +192,19 @@
         <li>インストールが終わったら、<strong>もう一度このリンクを開いて</strong>ください。</li>
         <li>アプリが開いて、みまもりがはじまります。</li>
       </ol>
+
+      <!-- 番号でつなぐ（anshin-platform #308）。リンク経由で紐付かなかったときの逃げ道。
+           iPhone で「もう一度開く」を忘れたまま先へ進んでしまった人が、ここで詰まらずに済む。
+           ⚠️ みまもりアプリ側の案内（招待タブの「送りかた」と「番号でつなぐ」）と同じことを
+              言っている。文言を変えるときは anshin-platform 側と必ず揃えること。 -->
+      <div class="fallback">
+        <p class="fallback-title">つながらないときは</p>
+        <p>
+          アプリを開くと、画面の上に <strong>8けたの番号</strong> が出ます。
+          その番号をご家族に伝えてください。ご家族の「みまもり」アプリで
+          「番号でつなぐ」に入れると、みまもりがはじまります。
+        </p>
+      </div>
     </div>
 
     <div id="noToken" class="error" hidden>
