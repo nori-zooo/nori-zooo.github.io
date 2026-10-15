@@ -40,8 +40,12 @@ Play Console → 対象アプリ → **Google Play による保護** → 「Goog
 
 ### 各招待ページの `APP_STORE_ID`
 
-`invite/hajimari/index.html` / `invite/okaeri/index.html` の JS 冒頭。App Store 公開時に採番される
+`invite/hajimari/index.html` / `invite/okaeri/index.html` の JS 冒頭。App Store 公開後に
 数値 ID を入れる。空の間は App Store の検索結果ページへ誘導する（リンク切れ回避）。
+
+**はじまりの刻は App Store 公開済みのため、`APP_STORE_ID` に `6767998433` を設定する変更を実装済み**
+（anshin-platform #238）。2026-10-16 にアプリ詳細 URL が HTTP 200 を返し、掲載名が
+「あんしんのはじまり」であることを確認。Web 公開反映と iOS 実機でのインストール・紐付け確認は別途必要。
 
 **はじまりの刻の ID は判明済み: `6767998433`**（2026-08-02・TestFlight 配信時に確認）。
 App Store Connect のアプリ ID と App Store の URL の数値は同一で、
