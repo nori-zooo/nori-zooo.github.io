@@ -222,12 +222,11 @@
     (function () {
       var APP_SCHEME = "hajimari";
       var PLAY_URL = "https://play.google.com/store/apps/details?id=com.norizooo.hajimari";
-      // TODO(#167): App Store 公開後、採番された数値 ID を入れる（例: "6478123456"）。
-      // 空のままだと App Store の検索結果ページへ誘導する（リンク切れは避ける）。
-      var APP_STORE_ID = "";
+      // App Store 公開済みのアプリ詳細へ直接誘導する（anshin-platform #238）。
+      var APP_STORE_ID = "6767998433";
       // ⚠️ 検索語は **App Store の掲載名と完全に一致**させること（anshin-platform #234）。
       // ここがズレると招待された人が検索でアプリに辿り着けず、招待フローが成立しない。
-      // 数値 ID が採番されたら APP_STORE_ID を埋めて、この検索フォールバックは使われなくなる。
+      // APP_STORE_ID が設定済みのため、通常はこの検索フォールバックを使わない。
       var APP_STORE_SEARCH_URL = "https://apps.apple.com/jp/search?term=" + encodeURIComponent("あんしんのはじまり");
 
       var token = new URLSearchParams(location.search).get("t") || "";
